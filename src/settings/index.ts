@@ -1,8 +1,8 @@
-import './settings.css';
-import getDataFromSyncStorage from './get-data-from-sync-storage';
+import './style.css';
+import getDataFromSyncStorage from '../util/get-data-from-sync-storage';
 import printSettingsToDom from './print-settings-to-dom';
 import readSettingsFromDom from './read-settings-from-dom';
-import storeDataInSyncStorage from './store-data-in-sync-storage';
+import storeDataInSyncStorage from '../util/store-data-in-sync-storage';
 
 const settingsDefault: Settings = {
   pomodoro: 25,
