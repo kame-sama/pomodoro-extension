@@ -25,22 +25,22 @@
               />
             </div>
             <div class="grid-item">
-              <label for="short-break">Short Break</label>
+              <label for="shortBreak">Short Break</label>
               <input
                 type="number"
-                name="short-break"
-                id="short-break"
+                name="shortBreak"
+                id="shortBreak"
                 autocomplete="off"
                 min="0"
                 step="0.1"
               />
             </div>
             <div class="grid-item">
-              <label for="long-break">Long Break</label>
+              <label for="longBreak">Long Break</label>
               <input
                 type="number"
-                name="long-break"
-                id="long-break"
+                name="longBreak"
+                id="longBreak"
                 autocomplete="off"
                 min="0"
                 step="0.1"
@@ -53,27 +53,27 @@
           <hr />
           <div class="grid">
             <div class="grid-item">
-              <label for="auto-start-breaks">Auto Start Breaks</label>
+              <label for="autoStartBreaks">Auto Start Breaks</label>
               <input
                 type="checkbox"
-                name="auto-start-breaks"
-                id="auto-start-breaks"
+                name="autoStartBreaks"
+                id="autoStartBreaks"
               />
             </div>
             <div class="grid-item">
-              <label for="auto-start-pomodoros">Auto Start Pomodoros</label>
+              <label for="autoStartPomodoros">Auto Start Pomodoros</label>
               <input
                 type="checkbox"
-                name="auto-start-pomodoros"
-                id="auto-start-pomodoros"
+                name="autoStartPomodoros"
+                id="autoStartPomodoros"
               />
             </div>
             <div class="grid-item">
-              <label for="long-break-interval">Long Break Interval</label>
+              <label for="longBreakInterval">Long Break Interval</label>
               <input
                 type="number"
-                name="long-break-interval"
-                id="long-break-interval"
+                name="longBreakInterval"
+                id="longBreakInterval"
                 autocomplete="off"
                 min="1"
               />
@@ -81,6 +81,10 @@
           </div>
         </div>
       </section>
+      <div class="grid-item">
+        <button id="save">Save changes</button>
+        <button id="reset">Reset to default</button>
+      </div>
     </main>
     <script type="module" src="./src/settings.ts"></script>
   </body>
