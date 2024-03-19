@@ -1,8 +1,14 @@
 export default function getDataFromSyncStorage<
   T extends keyof SyncStorageDataMap
->(
-  key: T | T[]
-): Promise<SyncStorageDataMap[T] | Partial<SyncStorageDataMap> | undefined> {
+>(key: T): Promise<SyncStorageDataMap[T]>;
+
+export default function getDataFromSyncStorage(
+  keys: Array<keyof SyncStorageDataMap>
+): Promise<Partial<SyncStorageDataMap>>;
+
+export default function getDataFromSyncStorage(
+  key: keyof SyncStorageDataMap | Array<keyof SyncStorageDataMap>
+): Promise<any> {
   return new Promise((resolve, reject) => {
     if (typeof key === 'string') {
       chrome.storage.sync.get(key, (data) => {
@@ -12,7 +18,7 @@ export default function getDataFromSyncStorage<
           if (!Object.keys(data).length) {
             resolve(undefined);
           } else {
-            resolve(data[key] as SyncStorageDataMap[T]);
+            resolve(data[key]);
           }
         }
       });
@@ -24,7 +30,7 @@ export default function getDataFromSyncStorage<
           if (!Object.keys(data).length) {
             resolve(undefined);
           } else {
-            resolve(data as Partial<SyncStorageDataMap>);
+            resolve(data);
           }
         }
       });
