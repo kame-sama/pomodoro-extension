@@ -7,7 +7,7 @@ import getDataFromSyncStorage from '../util/get-data-from-sync-storage';
 import getTimeLeftToAlarm from '../util/get-time-left-to-alarm';
 import storeDataInSessionStorage from '../util/store-data-in-session-storage';
 import storeDataInSyncStorage from '../util/store-data-in-sync-storage';
-import updateCurrentSession from './update-current-session';
+import updateCurrentSession from '../util/update-current-session';
 
 const settingsDefault: Settings = {
   pomodoro: 25,
@@ -106,7 +106,7 @@ settingsButton.addEventListener('click', () => {
 });
 
 skipButton.addEventListener('click', () => {
-  chrome.alarms.clearAll();
+  chrome.alarms.clear(session.timer);
   clearInterval(intervalId);
   updateCurrentSession(session as SessionStorageDataMap, settings);
   storeDataInSessionStorage(session);
@@ -121,28 +121,24 @@ skipButton.addEventListener('click', () => {
 chrome.alarms.onAlarm.addListener(async (event) => {
   clearInterval(intervalId);
   updateCurrentSession(session as SessionStorageDataMap, settings);
-  storeDataInSessionStorage(session);
 
   if (
     (event.name === 'pomodoro' && !settings.autoStartBreaks) ||
     (event.name !== 'pomodoro' && !settings.autoStartPomodoros)
   ) {
     DomController.printToToggler('Start');
-  } else if (
-    (event.name === 'pomodoro' && settings.autoStartBreaks) ||
-    (event.name !== 'pomodoro' && settings.autoStartPomodoros)
-  ) {
-    alarm = await createAlarmAndReturnDetails(
-      session.timer!,
-      settings[session.timer!]
-    );
+  }
+
+  DomController.printTimer(settings[session.timer!] * 60);
+
+  chrome.runtime.onMessage.addListener((message: Alarm) => {
+    alarm = message;
     intervalId = setInterval(() => {
       DomController.printTimer(getTimeLeftToAlarm(alarm!));
-    });
-  }
+    }, 1000);
+  });
 
   DomController.printBackground(session.timer!);
   DomController.printCounter(session.count!);
   DomController.printStatus(session.timer!);
-  DomController.printTimer(settings[session.timer!] * 60);
 });

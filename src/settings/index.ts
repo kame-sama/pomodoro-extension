@@ -25,6 +25,7 @@ document
   .querySelector<HTMLButtonElement>('#save')!
   .addEventListener('click', () => {
     storeDataInSyncStorage({ settings: readSettingsFromDom() });
+    chrome.alarms.clearAll();
   });
 
 document
@@ -33,4 +34,5 @@ document
     settings = settingsDefault;
     storeDataInSyncStorage({ settings });
     printSettingsToDom(settings);
+    chrome.alarms.clearAll();
   });
