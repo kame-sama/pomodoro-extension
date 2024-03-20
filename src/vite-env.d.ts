@@ -21,3 +21,16 @@ interface SyncStorageDataMap {
   blocker: string[];
   tasks: Task[];
 }
+
+type TimerName = 'pomodoro' | 'shortBreak' | 'longBreak';
+
+interface SessionStorageDataMap {
+  timer: TimerName;
+  count: number;
+  timeLeft: number;
+}
+
+interface Alarm {
+  name: TimerName;
+  scheduledTime: number;
+}
