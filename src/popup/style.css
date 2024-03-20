@@ -6,6 +6,11 @@
   --active-color: brown;
 }
 
+:root.break-theme {
+  --background-color: steelblue;
+  --active-color: navy;
+}
+
 *,
 *::before,
 *::after {
