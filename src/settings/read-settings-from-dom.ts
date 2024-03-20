@@ -11,11 +11,11 @@ const longBreakIntervalInput =
 
 export default function readSettingsFromDom(): Settings {
   return {
-    pomodoro: parseInt(pomodoroInput!.value),
-    shortBreak: parseInt(shortBreakInput!.value),
-    longBreak: parseInt(longBreakInput!.value),
+    pomodoro: parseFloat(pomodoroInput!.value),
+    shortBreak: parseFloat(shortBreakInput!.value),
+    longBreak: parseFloat(longBreakInput!.value),
     autoStartBreaks: autoStartBreaksInput!.checked,
     autoStartPomodoros: autoStartPomodorosInput!.checked,
-    longBreakInterval: parseInt(longBreakIntervalInput!.value),
+    longBreakInterval: parseFloat(longBreakIntervalInput!.value),
   };
 }
