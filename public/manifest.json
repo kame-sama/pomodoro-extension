@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Pomodoro",
   "version": "1.0.0",
-  "permissions": ["alarms", "storage"],
+  "permissions": ["alarms", "notifications", "storage"],
   "action": {
     "default_title": "Pomodoro",
     "default_popup": "popup.html"
