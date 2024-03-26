@@ -79,12 +79,12 @@ togglerButton.addEventListener('click', async () => {
     if (!session.timeLeft) {
       alarm = await createAlarmAndReturnDetails(
         session.timer!,
-        settings[session.timer!]
+        settings[session.timer!],
       );
     } else {
       alarm = await createAlarmAndReturnDetails(
         session.timer!,
-        session.timeLeft / 60
+        session.timeLeft / 60,
       );
     }
 
@@ -131,11 +131,13 @@ chrome.alarms.onAlarm.addListener(async (event) => {
 
   DomController.printTimer(settings[session.timer!] * 60);
 
-  chrome.runtime.onMessage.addListener((message: Alarm) => {
-    alarm = message;
-    intervalId = setInterval(() => {
-      DomController.printTimer(getTimeLeftToAlarm(alarm!));
-    }, 1000);
+  chrome.runtime.onMessage.addListener((request) => {
+    if (request.msg === 'ALARM') {
+      alarm = request.alarm;
+      intervalId = setInterval(() => {
+        DomController.printTimer(getTimeLeftToAlarm(alarm!));
+      }, 1000);
+    }
   });
 
   DomController.printBackground(session.timer!);
