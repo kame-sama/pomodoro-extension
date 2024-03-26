@@ -10,14 +10,17 @@ export default defineConfig({
         main: resolve(__dirname, 'popup.html'),
         settings: resolve(__dirname, 'settings.html'),
         background: resolve(__dirname, 'background.ts'),
+        content: resolve(__dirname, 'content.ts'),
       },
       output: {
         dir: join(__dirname, './dist'),
+        assetFileNames: 'assets/[hash][extname]',
+        chunkFileNames: 'assets/[hash].js',
         entryFileNames(chunkInfo) {
-          if (chunkInfo.name === 'background') {
-            return 'background.js';
+          if (chunkInfo.name === 'background' || chunkInfo.name === 'content') {
+            return '[name].js';
           } else {
-            return '[name][hash].js';
+            return '[hash].js';
           }
         },
       },
