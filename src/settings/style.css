@@ -57,10 +57,6 @@ li {
   font-size: 1rem;
 }
 
-li + li {
-  margin-top: 0.5rem;
-}
-
 img {
   max-width: 100%;
   height: auto;
@@ -169,4 +165,25 @@ button:hover {
 
 #reset:hover {
   text-decoration: underline;
+}
+
+.flex {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+#targetURL {
+  flex: 1;
+}
+
+.block-list > li {
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.1rem;
+  padding: 1rem 0;
+}
+
+.block-list > li + li {
+  border-top: 4px dotted cornsilk;
 }
