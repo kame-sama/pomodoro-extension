@@ -74,10 +74,17 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, _tab) => {
           console.warn(new Error(chrome.runtime.lastError.message));
         }
         if (response?.msg !== 'YES') {
-          chrome.scripting.executeScript({
-            target: { tabId },
-            files: ['content.js'],
-          });
+          chrome.scripting.executeScript(
+            {
+              target: { tabId },
+              files: ['content.js'],
+            },
+            () => {
+              if (chrome.runtime.lastError) {
+                console.warn(new Error(chrome.runtime.lastError.message));
+              }
+            },
+          );
         }
       },
     );
@@ -90,10 +97,10 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
       const alarm = await getAlarmData('pomodoro');
       sendResponse(alarm);
     })();
+    return true;
   }
+
   if (chrome.runtime.lastError) {
     console.warn(new Error(chrome.runtime.lastError.message));
   }
-
-  return true;
 });
