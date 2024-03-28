@@ -61,6 +61,18 @@ addUrl.addEventListener('click', () => {
   }
 });
 
+targetUrl.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter' && targetUrl.value !== '') {
+    blocker!.push(targetUrl.value);
+    targetUrl.value = '';
+    printBlockerTargetUrls(blockList, blocker!);
+    storeDataInSyncStorage({ blocker });
+    chrome.runtime.sendMessage({ msg: 'BLOCKER', blocker }).catch((error) => {
+      console.warn(error);
+    });
+  }
+});
+
 blockList.addEventListener('click', (event: Event) => {
   const eventTarget: EventTarget | null = event.target;
 
