@@ -91,5 +91,9 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
       sendResponse(alarm);
     })();
   }
+  if (chrome.runtime.lastError) {
+    console.warn(new Error(chrome.runtime.lastError.message));
+  }
+
   return true;
 });
